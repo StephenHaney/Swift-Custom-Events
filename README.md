@@ -17,7 +17,6 @@ This system is a bit more simple and works differently than Backbone's (for one,
 
 Let's create a cat class that can bug us while we're coding:
 
-
 ```swift
 class Cat {
     let events = EventManager();
