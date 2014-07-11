@@ -17,45 +17,51 @@ This system is a bit more simple and works differently than Backbone's (for one,
 
 Let's create a cat class that can bug us while we're coding:
 
-    class Cat {
-        let events = EventManager();
-    
-        func meow() {
-            println("Cat: MRaawwweeee");
-            self.events.trigger("meow");
-        }
+```swift
+class Cat {
+    let events = EventManager();
+
+    func meow() {
+        println("Cat: MRaawwweeee");
+        self.events.trigger("meow");
     }
+}
+```
 
 And a human class to represent ourselves:
 
-    class Human {
-        func adoptCat(cat:Cat) {
-            // you can pass in an anonymous code block to the event listener
-            cat.events.listenTo("meow", {
-                println("Human: Awww, what a cute kitty *pets cat*");
-            });
+```swift
+class Human {
+    func adoptCat(cat:Cat) {
+        // you can pass in an anonymous code block to the event listener
+        cat.events.listenTo("meow", {
+            println("Human: Awww, what a cute kitty *pets cat*");
+        });
 
-            // or you can pass a function reference
-            cat.events.listenTo("meow", self.dayDream);
-        }
-
-        func dayDream() {
-            println("Human daydreams about owning a dog");
-        }
+        // or you can pass a function reference
+        cat.events.listenTo("meow", self.dayDream);
     }
+
+    func dayDream() {
+        println("Human daydreams about owning a dog");
+    }
+}
+```
 
 Play out our little scene:
 
-    let zeus = Cat();
-    let stephen = Human();
+```swift
+let zeus = Cat();
+let stephen = Human();
 
-    stephen.adoptCat(zeus);
-    zeus.meow();
-    /*
-     * Cat: MRaawwweeee
-     * Human: Awww, what a cute kitty *pets cat*
-     * Human daydreams about owning a dog
-    */
+stephen.adoptCat(zeus);
+zeus.meow();
+/*
+ * Cat: MRaawwweeee
+ * Human: Awww, what a cute kitty *pets cat*
+ * Human daydreams about owning a dog
+*/
+```
 
 ### Disclosure:
 
