@@ -9,7 +9,7 @@ This provides a convenient way to organize your code.  It's especially useful fo
 
 Custom event listeners allow us to separate our concerns and prevent function call spaghetti.  We can keep the event agnostic while we add and remove functionality.
 
-**I prefer creating an 'Events' property of type EventManager on each Class you wish to track.**  Alternatively, you can also inherit this code onto any classes you like.  Finally, you could maintain one EventsManager object for your entire app (but listener performance may suffer with many listeners).
+**I prefer creating an 'Events' property of type EventManager on each Class you wish to track.**  Alternatively, you can also inherit this code onto any classes you like.  Or, you can maintain one EventsManager object for your entire app (but listener performance may suffer with many listeners).
 
 This system is a bit more simple and works differently than Backbone's (for one, they use JS prototypes to get their Event code onto all backbone objects).  It's intended as a starting place for custom events in Swift.
 
@@ -59,7 +59,7 @@ Play out our little scene:
 
 ### Disclosure:
 
-I haven't done much performance testing as it's "fast enough" for my purposes, but this is probably much slower than using delegates.  On the other hand, it's easier and faster to implement.
+I haven't done much performance testing as it's "fast enough" for my purposes, but this is probably much slower than using delegates.  On the other hand, it's easier and faster to implement (especially in cases with multiple listeners per event).
 
 This is a very early system developed for my specific needs.  Feel free to use and adapt as you need, and please send any feedback or improvements.
 
