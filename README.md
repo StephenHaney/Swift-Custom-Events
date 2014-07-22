@@ -59,9 +59,13 @@ Play out our little scene:
 
 ### Disclosure:
 
-I haven't done much performance testing as it's "fast enough" for my purposes, but this is probably much slower than using delegates.  On the other hand, it's easier and faster to implement (especially in cases with multiple listeners per event).
+This is potentially slower than using delegates or direct function calls (see performance testing, below).  On the other hand, it's easier and faster to implement (especially in cases with multiple listeners per event).
 
 This is a very early system developed for my specific needs.  Feel free to use and adapt as you need, and please send any feedback or improvements.
+
+### Performance Testing:
+
+I performed a real world comparison between using event triggers and a direct function call.  On average, the event trigger took 0.23 milliseconds to get into the action code.  Direct function calls performed in ~0.097 milliseconds.  Phew, that's quick!  More testing is needed, but I expected much worse results.  Function calls are twice as fast, but event triggers using this code are still pretty quick!  
 
 #### Potential improvements/considerations:
 - I haven't tested what happens if you remove instances of either the listener or event object from memory after wiring up a listener.
