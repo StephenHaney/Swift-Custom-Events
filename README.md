@@ -5,6 +5,8 @@ A very simple way to implement Backbone.js style custom event listeners and trig
 
 This provides a convenient way to organize your code.  It's especially useful for game systems like keeping track of events that count towards achievements.
 
+Updated for Swift 6.2 using Xcode 6.3 beta 2.
+
 ### Usage
 
 Custom event listeners allow us to separate our concerns and prevent function call spaghetti.  We can keep the event agnostic while we add and remove functionality.
@@ -20,10 +22,10 @@ Let's create a cat class that can bug us while we're coding:
 ```swift
 class Cat {
     let events = EventManager();
-
+    
     func meow() {
         println("Cat: MRaawwweeee");
-        self.events.trigger("meow");
+        self.events.trigger("meow", information: "The cat is hungry!");
     }
 }
 ```
@@ -34,16 +36,27 @@ And a human class to represent ourselves:
 class Human {
     func adoptCat(cat:Cat) {
         // you can pass in an anonymous code block to the event listener
-        cat.events.listenTo("meow", {
+        cat.events.listenTo("meow", action: {
             println("Human: Awww, what a cute kitty *pets cat*");
         });
-
+        
         // or you can pass a function reference
-        cat.events.listenTo("meow", self.dayDream);
+        cat.events.listenTo("meow", action: self.dayDream);
+        
+        // Using the information from the trigger:
+        // (notice the parameters for ponderCat)
+        cat.events.listenTo("meow", action: self.ponderCat);
     }
-
+    
     func dayDream() {
         println("Human daydreams about owning a dog");
+    }
+    
+    func ponderCat(information:Any?) {
+        if let info = information as? String {
+            println("Oooh, I think I know:");
+            println(info);
+        }
     }
 }
 ```
@@ -60,6 +73,8 @@ zeus.meow();
  * Cat: MRaawwweeee
  * Human: Awww, what a cute kitty *pets cat*
  * Human daydreams about owning a dog
+ * Oooh, I think I know:
+ * The cat is hungry!
 */
 ```
 
