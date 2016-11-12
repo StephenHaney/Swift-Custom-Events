@@ -5,7 +5,6 @@
 //  Copyright (c) 2014 Stephen Haney
 //  MIT License
 //
-
 import Foundation
 
 class EventManager {
@@ -15,23 +14,23 @@ class EventManager {
     // Create a new event listener, not expecting information from the trigger
     // + eventName: Matching trigger eventNames will cause this listener to fire
     // + action: The block of code you want executed when the event triggers
-    func listenTo(eventName:String, action:(()->())) {
+    func listenTo(eventName:String, action: @escaping (()->())) {
         let newListener = EventListenerAction(callback: action);
-        addListener(eventName, newEventListener: newListener);
+        addListener(eventName: eventName, newEventListener: newListener);
     }
     
     // Create a new event listener, expecting information from the trigger
     // + eventName: Matching trigger eventNames will cause this listener to fire
     // + action: The block of code you want executed when the event triggers
-    func listenTo(eventName:String, action:((Any?)->())) {
+    func listenTo(eventName:String, action: @escaping ((Any?)->())) {
         let newListener = EventListenerAction(callback: action);
-        addListener(eventName, newEventListener: newListener);
+        addListener(eventName: eventName, newEventListener: newListener);
     }
     
     internal func addListener(eventName:String, newEventListener:EventListenerAction) {
         if let listenerArray = self.listeners[eventName] {
             // action array exists for this event, add new action to it
-            listenerArray.addObject(newEventListener);
+            listenerArray.add(newEventListener);
         }
         else {
             // no listeners created for this event yet, create a new array
@@ -52,7 +51,7 @@ class EventManager {
         }
         else {
             // no specific parameters - remove all listeners on this object
-            self.listeners.removeAll(keepCapacity: false);
+            self.listeners.removeAll(keepingCapacity: false);
         }
     }
     
@@ -80,12 +79,12 @@ class EventListenerAction {
     let action:(() -> ())?;
     let actionExpectsInfo:((Any?) -> ())?;
     
-    init(callback:(() -> ())) {
+    init(callback: @escaping (() -> ()) ) {
         self.action = callback;
         self.actionExpectsInfo = nil;
     }
     
-    init(callback:((Any?) -> ())) {
+    init(callback: @escaping ((Any?) -> ()) ) {
         self.actionExpectsInfo = callback;
         self.action = nil;
     }
