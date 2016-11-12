@@ -5,7 +5,7 @@ A very simple way to implement Backbone.js style custom event listeners and trig
 
 This provides a convenient way to organize your code.  It's especially useful for game systems like keeping track of events that count towards achievements.
 
-Updated for Swift 6.2 using Xcode 6.3 beta 2.
+Updated for Swift 3.
 
 ### Usage
 
